@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ALK Urithi · Collection Ubuntu : trois masques africains brodés sur un sweat en coton biologique. Précommandes en petites séries.">
+<title>ALK Urithi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Karla:wght@400;500;700&display=swap">
+<style>
+/* Layout concept: boutique éditoriale en bandes pleine largeur ; grandes lettres UBUNTU en ouverture, fiches masque sur fond sable, configurateur de sweat, démarche, FAQ. */
+:root{
+  --bg:#FAF6EE; --surface:#F1E8D8; --ink:#17130F; --muted:#5D5448; --line:#DDD0BA;
+  --accent:#213B30; --on-accent:#FAF6EE; --terra:#B85A27; --green:#213B30;
+  --art:#E7D7BB; --art-ink:#17130F;
+  --show-lt:block; --show-dk:none;
+  --f-display:'Josefin Sans','Century Gothic','Avenir Next',sans-serif;
+  --f-body:'Karla','Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14110E; --surface:#1D1913; --ink:#F3EBDD; --muted:#B5A995; --line:#352E25;
+  --accent:#D9B98E; --on-accent:#17130F; --terra:#E0894F; --green:#8FB69F;
+  --show-lt:none; --show-dk:block; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14110E; --surface:#1D1913; --ink:#F3EBDD; --muted:#B5A995; --line:#352E25;
+  --accent:#D9B98E; --on-accent:#17130F; --terra:#E0894F; --green:#8FB69F;
+  --show-lt:none; --show-dk:block; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.05}
+p{margin:0}
+a{color:inherit}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:1180px;margin-inline:auto}
+.lt{display:var(--show-lt)} .dk{display:var(--show-dk)}
+:focus-visible{outline:3px solid var(--terra);outline-offset:3px}
+.eyebrow{font:600 .78rem/1 var(--f-display);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:48px;padding:0 1.6rem;border:2px solid var(--accent);background:var(--accent);color:var(--on-accent);font:600 .9rem/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:0}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn:hover{filter:brightness(1.1)}
+
+/* annonce + entête */
+.announce{margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:.55rem max(16px,env(safe-area-inset-left,0px));background:var(--green);color:#FAF6EE;text-align:center;font:600 .72rem/1.4 var(--f-display);letter-spacing:.2em;text-transform:uppercase}
+:root[data-theme="dark"] .announce{color:#14110E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .announce{color:#14110E}}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:1rem;border-bottom:1px solid var(--line)}
+header.top .brand{display:flex;align-items:center;gap:.8rem;text-decoration:none}
+header.top .brand img{width:64px}
+header.top .brand span{font:600 .78rem/1 var(--f-display);letter-spacing:.3em;text-transform:uppercase}
+nav.main{display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:flex-end}
+nav.main a{font:600 .8rem/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:.5rem 0;border-bottom:2px solid transparent}
+nav.main a:hover{border-color:var(--terra)}
+@media(max-width:640px){nav.main{gap:1rem}nav.main a:nth-child(n+4){display:none}header.top .brand span{display:none}}
+
+/* ouverture */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1rem,4vw,3rem);align-items:center;padding-block:clamp(2rem,6vw,4.5rem)}
+.letters{margin-top:1.4rem;font:700 clamp(4.2rem,15vw,11.5rem)/.82 var(--f-display);letter-spacing:-.02em;display:flex;flex-direction:column}
+.letters span{display:block}
+.letters .l1{color:var(--green)} .letters .l2{color:var(--ink)} .letters .l3{color:var(--terra)}
+.hero .lead{max-width:30rem;margin-top:1.6rem;font-size:1.15rem}
+.hero .sayings{margin-top:1.4rem;display:grid;gap:.15rem;font:600 .9rem/1.5 var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--terra)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem}
+.stage{background:var(--art);position:relative;aspect-ratio:4/5;display:grid;place-items:center;overflow:hidden}
+.stage::before{content:"";position:absolute;inset:0;background:linear-gradient(118deg,transparent 0 46%,rgba(184,90,39,.9) 46% 62%,transparent 62%)}
+.stage img{position:relative;width:86%;max-height:92%;object-fit:contain}
+.stage figcaption{position:absolute;left:1rem;bottom:.8rem;font:600 .68rem/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--art-ink)}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.letters{flex-direction:row;flex-wrap:wrap;gap:0 1rem;font-size:clamp(4rem,22vw,8rem)}}
+
+/* repères */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--line)}
+.facts div{padding:1.2rem 1rem;border-left:1px solid var(--line)}
+.facts div:first-child{border-left:0;padding-left:0}
+.facts b{display:block;font:700 1.05rem/1.2 var(--f-display);margin-bottom:.25rem}
+.facts span{font-size:.95rem;color:var(--muted)}
+@media(max-width:820px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(3){border-left:0;padding-left:0}.facts div:nth-child(n+3){border-top:1px solid var(--line)}}
+
+section.band{padding-block:clamp(3rem,8vw,6rem)}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem 3rem;margin-bottom:2.2rem}
+.head h2{font-size:clamp(2rem,5vw,3.4rem);max-width:18ch}
+.head p{max-width:34rem;color:var(--muted)}
+
+/* masques */
+.masks{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.mask{display:flex;flex-direction:column;min-width:0}
+.mask .art{background:var(--art);aspect-ratio:1/1.05;padding:8%;overflow:hidden}
+.mask .art img{width:100%;height:100%;object-fit:contain}
+.mask h3{font-size:1.6rem;margin-top:1rem}
+.mask .meta{margin-top:.3rem;font:600 .74rem/1.4 var(--f-display);letter-spacing:.18em;text-transform:uppercase;color:var(--terra)}
+.mask p{margin-top:.6rem;color:var(--muted)}
+.mask button{margin-top:auto;align-self:flex-start}
+.mask .txt{display:flex;flex-direction:column;gap:0;flex:1}
+.mask .link{margin-top:1rem;background:none;border:0;padding:.4rem 0;border-bottom:2px solid var(--ink);font:600 .8rem/1 var(--f-display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);cursor:pointer}
+@media(max-width:820px){.masks{grid-template-columns:1fr}.mask .art{aspect-ratio:1/.9}}
+
+/* configurateur */
+#boutique{background:var(--surface);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.shop{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
+.shop .stage{aspect-ratio:1/1.1}
+.shop .stage::before{background:linear-gradient(118deg,transparent 0 58%,rgba(184,90,39,.85) 58% 70%,transparent 70%)}
+.shop .stage img{width:80%}
+.panel{display:grid;gap:1.4rem}
+.panel h3{font-size:clamp(1.8rem,4vw,2.6rem)}
+.price{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap}
+.price b{font:700 2rem/1 var(--f-display)}
+.price span{color:var(--muted);font-size:.95rem}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:.6rem;font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+legend em{font-style:normal;color:var(--ink);letter-spacing:.08em;margin-left:.5rem}
+.opts{display:flex;flex-wrap:wrap;gap:.55rem}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label{cursor:pointer}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-width:52px;min-height:46px;padding:0 1rem;border:2px solid var(--line);background:var(--bg);font:600 .88rem/1 var(--f-display);letter-spacing:.08em}
+.opts input:checked+.chip{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.opts input:focus-visible+.chip,.opts input:focus-visible+.sw{outline:3px solid var(--terra);outline-offset:3px}
+.sw{display:block;width:46px;height:46px;border-radius:50%;border:2px solid var(--line);box-shadow:inset 0 0 0 4px var(--surface)}
+.opts input:checked+.sw{border-color:var(--ink)}
+.facts-list{display:grid;gap:.45rem;padding:0;margin:0;list-style:none;font-size:.98rem}
+.facts-list li{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:.45rem}
+.facts-list li span:first-child{color:var(--muted)}
+.facts-list li span:last-child{text-align:right}
+.order{border:2px solid var(--ink);padding:1.1rem;display:grid;gap:.8rem;background:var(--bg)}
+.order .sum{font:600 .95rem/1.5 var(--f-body);overflow-wrap:anywhere}
+.order .mail{font:700 1rem/1.3 var(--f-display);letter-spacing:.04em;overflow-wrap:anywhere;user-select:all}
+.order small{color:var(--muted);font-size:.9rem}
+.toast{min-height:1.4em;font-weight:700;color:var(--green)}
+@media(max-width:820px){.shop{grid-template-columns:1fr}}
+
+
+.opts input:disabled+.chip{opacity:.4;text-decoration:line-through;cursor:not-allowed}
+.opts label:has(input:disabled){cursor:not-allowed}
+.stock{font:600 .92rem/1.4 var(--f-body);color:var(--terra);min-height:1.3em}
+.cart{display:grid;gap:.7rem}
+.cart h4{margin:0;font:700 1.05rem/1.2 var(--f-display);letter-spacing:.04em}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.lines li{display:grid;grid-template-columns:1fr auto;gap:.2rem .8rem;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.lines .nm{font-weight:700;overflow-wrap:anywhere}
+.lines .sub{grid-column:1;color:var(--muted);font-size:.9rem}
+.qty{display:inline-flex;align-items:center;gap:.3rem;grid-row:1/3;grid-column:2}
+.qty button{width:36px;height:36px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:700 1.1rem/1 var(--f-display);cursor:pointer}
+.qty button:disabled{opacity:.35;cursor:not-allowed}
+.qty output{min-width:1.6rem;text-align:center;font-weight:700}
+.total{display:flex;justify-content:space-between;font:700 1.1rem/1.2 var(--f-display)}
+.field{display:grid;gap:.35rem}
+.field label{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.field input{min-height:46px;padding:0 .9rem;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.wa{background:#1B6B3A;border-color:#1B6B3A;color:#fff}
+.wa[aria-disabled="true"]{opacity:.5;pointer-events:none}
+.done{border:2px solid var(--green);padding:1rem;display:grid;gap:.5rem;background:var(--bg)}
+.done b{font:700 1.1rem/1.2 var(--f-display)}
+.done ol{margin:.2rem 0 0;padding-left:1.2rem;color:var(--muted)}
+.empty{color:var(--muted);font-size:.95rem}
+.btn.small{min-height:40px;font-size:.78rem;padding:0 1rem}
+
+/* démarche */
+.manifest{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,4rem);align-items:start}
+.manifest h2{font-size:clamp(2.4rem,7vw,5rem);line-height:.95}
+.manifest h2 em{font-style:normal;color:var(--terra)}
+.manifest .body{display:grid;gap:1.1rem;max-width:34rem}
+@media(max-width:820px){.manifest{grid-template-columns:1fr}}
+
+/* étapes */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);counter-reset:s;border-top:2px solid var(--ink)}
+.steps li{list-style:none;padding:1.2rem 1.2rem 0 0;counter-increment:s}
+.steps li::before{content:counter(s);display:block;font:700 2.6rem/1 var(--f-display);color:var(--terra);margin-bottom:.6rem}
+.steps h3{font-size:1.15rem;margin-bottom:.4rem}
+.steps p{color:var(--muted);font-size:.98rem}
+.steps{padding:0;margin:0}
+@media(max-width:820px){.steps{grid-template-columns:1fr 1fr;row-gap:1.5rem}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:46rem}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;padding:1.1rem 0;font:600 1.05rem/1.3 var(--f-display)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--terra)}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 1.2rem;color:var(--muted);max-width:40rem}
+
+footer{border-top:1px solid var(--line);padding-block:2.2rem 3rem;display:grid;grid-template-columns:1.2fr 1fr;gap:1.5rem 3rem}
+footer img{width:92px;margin-bottom:.8rem}
+footer p{color:var(--muted);max-width:32rem}
+footer .meta{display:grid;gap:.3rem;font-size:.95rem}
+footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+@media(max-width:640px){footer{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="announce">Précommandes bientôt · Collection n°1 · Broderie sur sweat</div>
+  <header class="top">
+    <a class="brand" href="#accueil" aria-label="ALK Urithi, accueil">
+      <img class="lt" src="img/ALK_noir.webp" alt="ALK" width="64" height="31">
+      <img class="dk" src="img/ALK_blanc.webp" alt="" width="64" height="31">
+      <span>Urithi</span>
+    </a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#masques">Les masques</a>
+      <a href="#boutique">Précommande</a>
+      <a href="#demarche">Notre démarche</a>
+      <a href="#faq">Questions</a>
+    </nav>
+  </header>
+
+  <main id="accueil">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">ALK Urithi · Collection n°1</p>
+        <h1 class="letters" aria-label="Ubuntu">
+          <span class="l1" aria-hidden="true">UBU</span>
+          <span class="l3" aria-hidden="true">NTU</span>
+        </h1>
+        <p class="lead">Je suis parce que nous sommes. Trois masques africains brodés sur un sweat en coton biologique, chacun accompagné de l’histoire qu’il porte.</p>
+        <div class="sayings" aria-hidden="true"><span>Umuntu</span><span>Ngumuntu</span><span>Ngabantu</span></div>
+        <div class="cta">
+          <a class="btn" href="#boutique">Choisir mon sweat</a>
+          <a class="btn ghost" href="#masques">Voir les trois masques</a>
+        </div>
+      </div>
+      <figure class="stage" style="margin:0">
+        <img id="heroimg" src="img/M01_NAV.webp" alt="Sweat bleu marine avec le masque Mukuji brodé sur la poitrine, côté cœur" width="760" height="882">
+        <figcaption>Masque Mukuji · French Navy</figcaption>
+      </figure>
+    </div>
+
+    <div class="facts" role="list">
+      <div role="listitem"><b>Broderie</b><span>Un motif brodé côté cœur, pas imprimé</span></div>
+      <div role="listitem"><b>Coton biologique</b><span>100 % coton, molleton brossé 350 g/m²</span></div>
+      <div role="listitem"><b>Une fiche par masque</b><span>Origine, usages et signification</span></div>
+      <div role="listitem"><b>Petites séries</b><span>Produit après précommande, 25 pièces au départ</span></div>
+    </div>
+
+    <section class="band" id="masques" aria-labelledby="t-masques">
+      <div class="head">
+        <h2 id="t-masques">Trois masques, une même idée</h2>
+        <p>Chaque masque est identifié, documenté et replacé dans son contexte avant d’être réinterprété par ALK. Les fiches d’histoire sont rédigées avec leurs sources.</p>
+      </div>
+      <div class="masks">
+        <article class="mask">
+          <div class="art"><img src="img/mask_M01.webp" alt="Illustration du masque Mukuji, visage rouge aux yeux en cauris" width="600" height="825"></div>
+          <div class="txt">
+            <h3>Masque Mukuji</h3>
+            <p class="meta">Mukuji · Thème : humanité partagée</p>
+            <p>Le visage rouge et les yeux en grains de cauris ouvrent la collection : ce que nous sommes tient à ce que nous partageons.</p>
+            <button class="link" type="button" data-pick="M01">Voir le sweat</button>
+          </div>
+        </article>
+        <article class="mask">
+          <div class="art"><img src="img/mask_M02.webp" alt="Illustration du masque Kpelie, noir et blanc, orné de cornes" width="600" height="711"></div>
+          <div class="txt">
+            <h3>Masque Kpelie</h3>
+            <p class="meta">Kpelie · Thème : solidarité</p>
+            <p>Un masque en noir et blanc, dense de motifs, qui rappelle que la force d’un groupe tient à ceux qui le composent.</p>
+            <button class="link" type="button" data-pick="M02">Voir le sweat</button>
+          </div>
+        </article>
+        <article class="mask">
+          <div class="art"><img src="img/mask_M03.webp" alt="Illustration du masque Bwa, forme géométrique verticale" width="600" height="876"></div>
+          <div class="txt">
+            <h3>Masque Bwa</h3>
+            <p class="meta">Bwa · Thème : communauté</p>
+            <p>Des formes géométriques, un croissant au sommet : le masque porte l’identité d’une communauté et la transmet.</p>
+            <button class="link" type="button" data-pick="M03">Voir le sweat</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="band" id="boutique" aria-labelledby="t-boutique">
+      <div class="head">
+        <h2 id="t-boutique">Choisir son sweat</h2>
+        <p>Un seul modèle, trois motifs. Choisissez le masque, le coloris et la taille, ajoutez-les à votre précommande, puis envoyez-la sur WhatsApp. Série limitée à 25 pièces.</p>
+      </div>
+      <div class="shop">
+        <figure class="stage" style="margin:0">
+          <img id="prodimg" src="img/M01_NAV.webp" alt="" width="760" height="882">
+          <figcaption id="prodcap"></figcaption>
+        </figure>
+        <div class="panel">
+          <div>
+            <p class="eyebrow">Sweat brodé · Collection Ubuntu</p>
+            <h3 id="prodname" style="margin-top:.6rem">Masque Mukuji</h3>
+          </div>
+          <div class="price"><b id="price">49,99 €</b><span>prix de précommande, TVA non applicable</span></div>
+
+          <fieldset>
+            <legend>Masque</legend>
+            <div class="opts" id="o-mask"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Coloris<em id="colname"></em></legend>
+            <div class="opts" id="o-col"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Taille</legend>
+            <div class="opts" id="o-size"></div>
+          </fieldset>
+
+          <ul class="facts-list">
+            <li><span>Modèle</span><span>Sweat col rond unisexe, coupe droite</span></li>
+            <li><span>Matière</span><span>100 % coton biologique, 350 g/m²</span></li>
+            <li><span>Marquage</span><span>Broderie côté cœur, dos uni</span></li>
+            <li><span>Livraison</span><span>3 à 4 semaines après la clôture de la précommande</span></li>
+          </ul>
+
+          <div class="order">
+            <p class="stock" id="stock" role="status"></p>
+            <button class="btn" type="button" id="add">Ajouter à ma précommande</button>
+            <p class="toast" id="toast" role="status"></p>
+          </div>
+
+          <div class="order cart" id="cart" aria-live="polite">
+            <h4>Ma précommande</h4>
+            <ul class="lines" id="lines"></ul>
+            <p class="empty" id="empty">Votre sélection est vide. Choisissez un sweat, puis ajoutez-le.</p>
+            <div class="total" id="totalrow" hidden><span>Total</span><span id="total">0 €</span></div>
+            <div class="field" id="nameField">
+              <label for="fname">Votre prénom</label>
+              <input id="fname" type="text" autocomplete="given-name" maxlength="40" placeholder="Awa">
+            </div>
+            <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Envoyer ma précommande sur WhatsApp</a>
+            <button class="btn ghost small" type="button" id="copy">Copier le message</button>
+            <p class="mail" id="mail" hidden>Ou écrivez à alk-urithi@proton.me</p>
+            <small>La commande s’ouvre dans WhatsApp, déjà rédigée. Nous confirmons la disponibilité et les frais de livraison, puis nous vous envoyons un lien de paiement PayPal par message. Rien n’est débité à cette étape.</small>
+            <div class="done" id="done" hidden>
+              <b id="doneref"></b>
+              <p>Votre message est copié. Dans WhatsApp, collez-le dans la conversation (appui long, « Coller »), puis appuyez sur « Envoyer ». Si rien n’est copié, utilisez « Copier le message ».</p>
+              <ol><li>Nous vérifions la disponibilité.</li><li>Nous vous envoyons le lien de paiement PayPal.</li><li>Votre sweat est brodé puis expédié.</li></ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="demarche" aria-labelledby="t-dem">
+      <div class="manifest">
+        <h2 id="t-dem">Ceci n’est pas un objet d’art. <em>Du moins, pas seulement.</em></h2>
+        <div class="body">
+          <p>Exposés dans les musées ou admirés pour leur esthétique, les masques africains ne sont pourtant pas de simples objets. Dans de nombreuses sociétés, ils tenaient une place dans la vie collective : cérémonies, rites d’initiation, célébrations. Certains incarnaient des figures ancestrales ou transmettaient des enseignements.</p>
+          <p>ALK Urithi associe une esthétique contemporaine à un travail de recherche et de transmission. Chaque collection réunit quelques masques autour d’une valeur. La première, Ubuntu, en compte trois.</p>
+          <p><strong>Urithi</strong> signifie « héritage » en swahili. Imehamasishwa na Ubuntu.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="processus" aria-labelledby="t-proc" style="padding-top:0">
+      <div class="head"><h2 id="t-proc">De la précommande au sweat</h2><p>Nous produisons à la demande, en petites séries. Le calendrier exact est confirmé à l’ouverture.</p></div>
+      <ol class="steps">
+        <li><h3>Vous précommandez</h3><p>Masque, coloris et taille. Rien n’est fabriqué avant la clôture.</p></li>
+        <li><h3>Nous lançons la série</h3><p>Les broderies sont validées avec l’atelier avant la production.</p></li>
+        <li><h3>L’atelier brode</h3><p>Chaque motif est brodé côté cœur sur le sweat que vous avez choisi.</p></li>
+        <li><h3>Vous recevez</h3><p>Le sweat arrive avec la fiche d’histoire du masque.</p></li>
+      </ol>
+    </section>
+
+    <section class="band" id="faq" aria-labelledby="t-faq" style="padding-top:0">
+      <div class="head"><h2 id="t-faq">Questions fréquentes</h2></div>
+      <div class="faq">
+        <details><summary>Quelles tailles proposez-vous ?</summary><p>Du S au XL pour la première série. Le sweat est unisexe, de coupe droite.</p></details>
+        <details><summary>De quoi est fait le sweat ?</summary><p>De coton biologique, en molleton brossé de 350 g/m². Le motif est brodé, pas imprimé.</p></details>
+        <details><summary>Pourquoi précommander ?</summary><p>Nous produisons en petites séries pour ne rien gaspiller. La précommande permet de lancer la fabrication avec les quantités réelles.</p></details>
+        <details><summary>Quand ouvre la boutique ?</summary><p>Bientôt. Vous pouvez déjà préparer votre précommande ci-dessus : elle s’envoie sur WhatsApp.</p></details>
+        <details><summary>Les masques sont-ils des copies ?</summary><p>Non. Ce sont des interprétations illustrées par ALK de masques traditionnels. Chaque fiche indique l’origine du masque et nos sources.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <img class="lt" src="img/ALK_noir.webp" alt="ALK" width="92" height="44">
+      <img class="dk" src="img/ALK_blanc.webp" alt="ALK" width="92" height="44">
+      <p>Inspirons le monde. Une marque de vêtements inspirée du patrimoine africain, qui distingue ce qui est documenté de ce qui est réinterprété.</p>
+    </div>
+    <div class="meta">
+      <b>Contact</b>
+      <span>alk-urithi@proton.me</span>
+      <span>France · précommandes bientôt</span>
+      <span>© 2026 ALK Urithi</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ===== Réglages à modifier ===== */
+var PRICE=49.99;              /* prix d'un sweat, en euros (point, pas virgule) */
+var WA_LINK='https://wa.me/message/A5XHQGCBXG5HO1';   /* lien WhatsApp Business (QR / lien court) : prioritaire */
+var WA_NUMBER='';             /* numéro WhatsApp Business, format international sans + (ex. 33612345678) */
+var EMAIL='alk-urithi@proton.me';
+var PAYPAL='https://paypal.me/EmmanuelDestaing';  /* lien PayPal.me, à envoyer au client après confirmation */
+/* Enregistrement automatique des commandes dans un Google Form / Google Sheets (laisser FORM_URL vide pour désactiver) */
+var FORM_URL='';              /* ex. https://docs.google.com/forms/d/e/XXXX/formResponse */
+var FORM_FIELDS={ref:'',name:'',sku:'',size:'',qty:'',amount:''};  /* ex. ref:'entry.123456789' */          /* moyen de paiement affiché */
+/* Stock de la première série par référence et par taille (tech pack, 25 pièces) */
+var STOCK={
+  'M01-NAT':{S:0,M:1,L:1,XL:1}, 'M01-CHI':{S:1,M:1,L:1,XL:0}, 'M01-NAV':{S:1,M:1,L:1,XL:0},
+  'M02-GLG':{S:1,M:2,L:1,XL:0}, 'M02-NAV':{S:0,M:1,L:1,XL:2},
+  'M03-NAT':{S:1,M:1,L:1,XL:0}, 'M03-NAV':{S:0,M:1,L:1,XL:1}, 'M03-GLG':{S:0,M:0,L:1,XL:1}
+};
+/* ================================ */
+var MASKS={
+  M01:{name:'Masque Mukuji',cols:['NAT','CHI','NAV']},
+  M02:{name:'Masque Kpelie',cols:['GLG','NAV']},
+  M03:{name:'Masque Bwa',cols:['NAT','NAV','GLG']}
+};
+var COLS={
+  NAV:{name:'French Navy',hex:'#303E51'},
+  NAT:{name:'Natural Raw',hex:'#F3E9DE'},
+  CHI:{name:'Heather Grey',hex:'#D3D3D3'},
+  GLG:{name:'Glazed Green',hex:'#244847'}
+};
+var SIZES=['S','M','L','XL'];
+var st={m:'M01',c:'NAT',s:'M'};
+var cart=[];   /* {k:'M01-NAV', s:'M', q:1} */
+var ref=null;
+function eur(n){return (Math.round(n*100)/100).toFixed(2).replace('.',',').replace(',00','')+' €'}
+function $(id){return document.getElementById(id)}
+function key(){return st.m+'-'+st.c}
+function sku(k){return 'ALK-UBU-'+k}
+function inCart(k,s){var q=0;cart.forEach(function(l){if(l.k===k&&l.s===s)q+=l.q});return q}
+function left(k,s){return (STOCK[k]?STOCK[k][s]:0)-inCart(k,s)}
+function label(k){var p=k.split('-');return MASKS[p[0]].name+' · '+COLS[p[1]].name}
+try{var sv=JSON.parse(localStorage.getItem('alk-cart')||'[]');if(Array.isArray(sv))sv.forEach(function(l){if(STOCK[l.k]&&SIZES.indexOf(l.s)>=0&&l.q>0&&left(l.k,l.s)>=l.q)cart.push(l)})}catch(e){}
+function save(){try{localStorage.setItem('alk-cart',JSON.stringify(cart))}catch(e){}}
+function radios(box,name,items,val,render){
+  box.innerHTML='';
+  items.forEach(function(it){
+    var l=document.createElement('label');
+    var i=document.createElement('input');i.type='radio';i.name=name;i.value=it.v;i.id=name+'-'+it.v;i.checked=(it.v===val);i.disabled=!!it.off;
+    l.appendChild(i);l.insertAdjacentHTML('beforeend',render(it));
+    i.addEventListener('change',function(){set(name,it.v)});
+    box.appendChild(l);
+  });
+}
+function set(k,v){
+  if(k==='m'){st.m=v;if(MASKS[v].cols.indexOf(st.c)<0)st.c=MASKS[v].cols[0]}
+  if(k==='c')st.c=v;
+  if(k==='s')st.s=v;
+  $('toast').textContent='';
+  draw();
+}
+function draw(){
+  var m=MASKS[st.m],c=COLS[st.c],k=key();
+  if(left(k,st.s)<=0){var f=SIZES.filter(function(s){return left(k,s)>0})[0];if(f)st.s=f}
+  radios($('o-mask'),'m',Object.keys(MASKS).map(function(x){return{v:x,t:MASKS[x].name.replace('Masque ','')}}),st.m,function(it){return '<span class="chip">'+it.t+'</span>'});
+  radios($('o-col'),'c',m.cols.map(function(x){return{v:x,t:COLS[x].name,hex:COLS[x].hex}}),st.c,function(it){return '<span class="sw" style="background:'+it.hex+'" title="'+it.t+'"></span><span style="position:absolute;left:-9999px">'+it.t+'</span>'});
+  radios($('o-size'),'s',SIZES.map(function(s){return{v:s,off:left(k,s)<=0}}),st.s,function(it){return '<span class="chip">'+it.v+'</span>'});
+  $('colname').textContent=c.name;
+  $('prodname').textContent=m.name;
+  var img=$('prodimg');img.src='img/'+k.replace('-','_')+'.webp';img.alt='Sweat '+c.name.toLowerCase()+' avec le '+m.name.toLowerCase()+' brodé côté cœur';
+  $('prodcap').textContent=m.name+' · '+c.name+' · maquette';
+  $('price').textContent=eur(PRICE);
+  var n=left(k,st.s),sold=SIZES.every(function(s){return left(k,s)<=0});
+  $('stock').textContent=sold?'Ce coloris est épuisé pour la première série.':(n===1?'Dernière pièce en taille '+st.s+'.':'Plus que '+n+' pièces en taille '+st.s+'.');
+  $('add').disabled=n<=0;
+  drawCart();
+}
+function total(){return cart.reduce(function(a,l){return a+l.q*PRICE},0)}
+function newRef(){var d=new Date(),p=function(x){return String(x).padStart(2,'0')},ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',r='';for(var i=0;i<4;i++)r+=ch[Math.floor(Math.random()*ch.length)];return 'ALK-'+p(d.getMonth()+1)+p(d.getDate())+'-'+r}
+function message(){
+  if(!ref)ref=newRef();
+  var nm=$('fname').value.trim(),L=['Bonjour ALK Urithi, nouvelle précommande (réf. '+ref+')'];
+  if(nm)L.push('Prénom : '+nm);
+  cart.forEach(function(l){L.push(l.q+' × '+sku(l.k)+' · '+label(l.k)+' · taille '+l.s+' · '+eur(l.q*PRICE))});
+  L.push('Total : '+eur(total()));
+  L.push('Je règle par PayPal : merci de me confirmer la disponibilité, la livraison et le lien de paiement.');
+  return L.join('\n');
+}
+function drawCart(){
+  var ul=$('lines');ul.innerHTML='';
+  cart.forEach(function(l,i){
+    var li=document.createElement('li');
+    li.innerHTML='<span class="nm"></span><span class="sub"></span><span class="qty"><button type="button" aria-label="Retirer un">−</button><output></output><button type="button" aria-label="Ajouter un">+</button></span>';
+    li.querySelector('.nm').textContent=label(l.k);
+    li.querySelector('.sub').textContent='Taille '+l.s+' · '+eur(l.q*PRICE);
+    li.querySelector('output').textContent=l.q;
+    var b=li.querySelectorAll('button');
+    b[0].addEventListener('click',function(){l.q--;if(l.q<=0)cart.splice(i,1);changed()});
+    b[1].disabled=left(l.k,l.s)<=0;
+    b[1].addEventListener('click',function(){if(left(l.k,l.s)>0){l.q++;changed()}});
+    ul.appendChild(li);
+  });
+  var has=cart.length>0;
+  $('empty').hidden=has;$('totalrow').hidden=!has;$('nameField').hidden=!has;
+  $('total').textContent=eur(total());
+  $('copy').hidden=!has;
+  var wa=$('wa');wa.hidden=!has;
+  if(has&&WA_LINK){wa.href=WA_LINK;wa.setAttribute('aria-disabled','false');wa.textContent='Envoyer ma précommande sur WhatsApp'}
+  else if(has&&WA_NUMBER){wa.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(message());wa.setAttribute('aria-disabled','false');wa.textContent='Envoyer ma précommande sur WhatsApp'}
+  else if(has){wa.href='#';wa.setAttribute('aria-disabled','true');wa.textContent='WhatsApp bientôt disponible'}
+  $('mail').hidden=!(has&&!WA_NUMBER);
+}
+function sendToForm(){
+  if(!FORM_URL||!FORM_FIELDS.ref)return;
+  cart.forEach(function(l){
+    var b=new URLSearchParams();
+    b.append(FORM_FIELDS.ref,ref);b.append(FORM_FIELDS.name,$('fname').value.trim());
+    b.append(FORM_FIELDS.sku,sku(l.k));b.append(FORM_FIELDS.size,l.s);b.append(FORM_FIELDS.qty,l.q);b.append(FORM_FIELDS.amount,String(l.q*PRICE).replace('.',','));
+    try{fetch(FORM_URL,{method:'POST',mode:'no-cors',body:b,keepalive:true})}catch(e){}
+  });
+}
+function changed(){ref=null;$('done').hidden=true;save();draw()}
+$('add').addEventListener('click',function(){
+  var k=key(),s=st.s;if(left(k,s)<=0)return;
+  var l=cart.filter(function(x){return x.k===k&&x.s===s})[0];
+  if(l)l.q++;else cart.push({k:k,s:s,q:1});
+  $('toast').textContent='Ajouté : '+label(k)+', taille '+s+'.';
+  ref=null;$('done').hidden=true;save();draw();
+});
+$('fname').addEventListener('input',function(){drawCart()});
+$('wa').addEventListener('click',function(e){
+  if(this.getAttribute('aria-disabled')==='true'){e.preventDefault();return}
+  var t=message();
+  if(WA_LINK){try{navigator.clipboard.writeText(t).then(function(){$('toast').textContent='Message copié : collez-le dans la conversation WhatsApp.'},function(){})}catch(x){}}
+  $('doneref').textContent='Référence '+ref;$('done').hidden=false;sendToForm();
+});
+$('copy').addEventListener('click',function(){
+  var t=message(),done=function(){$('toast').textContent='Message copié. Envoyez-le sur WhatsApp ou à '+EMAIL+'.';$('doneref').textContent='Référence '+ref;$('done').hidden=false},
+  fail=function(){$('toast').textContent='Copie impossible : sélectionnez le récapitulatif ci-dessus.'};
+  try{navigator.clipboard.writeText(t).then(done,fail)}catch(e){fail()}
+});
+document.querySelectorAll('[data-pick]').forEach(function(b){
+  b.addEventListener('click',function(){set('m',b.getAttribute('data-pick'));$('boutique').scrollIntoView({behavior:'smooth'})});
+});
+draw();
+</script>
+</body>
+</html>
