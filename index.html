@@ -147,7 +147,7 @@ legend em{font-style:normal;color:var(--ink);letter-spacing:.08em;margin-left:.5
 .field label{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .field input{min-height:46px;padding:0 .9rem;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
 .wa{background:#1B6B3A;border-color:#1B6B3A;color:#fff}
-.wa[aria-disabled="true"]{opacity:.5;pointer-events:none}
+.btn[aria-disabled="true"]{opacity:.5;pointer-events:none}
 .done{border:2px solid var(--green);padding:1rem;display:grid;gap:.5rem;background:var(--bg)}
 .done b{font:700 1.1rem/1.2 var(--f-display)}
 .done ol{margin:.2rem 0 0;padding-left:1.2rem;color:var(--muted)}
@@ -320,17 +320,21 @@ footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-trans
             <p class="empty" id="empty">Votre sélection est vide. Choisissez un sweat, puis ajoutez-le.</p>
             <div class="total" id="totalrow" hidden><span>Total</span><span id="total">0 €</span></div>
             <div class="field" id="nameField">
-              <label for="fname">Votre prénom</label>
-              <input id="fname" type="text" autocomplete="given-name" maxlength="40" placeholder="Awa">
+              <label for="fname">Prénom et nom</label>
+              <input id="fname" type="text" autocomplete="name" maxlength="60" placeholder="Awa Diallo">
             </div>
-            <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Envoyer ma précommande sur WhatsApp</a>
-            <button class="btn ghost small" type="button" id="copy">Copier le message</button>
-            <p class="mail" id="mail" hidden>Ou écrivez à alk-urithi@proton.me</p>
-            <small>La commande s’ouvre dans WhatsApp, déjà rédigée. Nous confirmons la disponibilité et les frais de livraison, puis nous vous envoyons un lien de paiement PayPal par message. Rien n’est débité à cette étape.</small>
+            <div class="field" id="cityField">
+              <label for="fcity">Code postal et ville</label>
+              <input id="fcity" type="text" autocomplete="off" maxlength="60" placeholder="75011 Paris">
+            </div>
+            <p class="empty" id="hint">Indiquez votre nom et votre ville pour envoyer la précommande.</p>
+            <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Envoyer sur WhatsApp</a>
+            <a class="btn ghost small" id="mailbtn" href="#" aria-disabled="true">Envoyer par e-mail</a>
+            <small>WhatsApp ou votre messagerie s’ouvre avec la précommande déjà rédigée : il ne reste qu’à appuyer sur « Envoyer ». Nous vous confirmons la disponibilité, le mode et les frais de livraison, ainsi que les modalités de paiement. Rien n’est débité à cette étape.</small>
             <div class="done" id="done" hidden>
               <b id="doneref"></b>
-              <p>Votre message est copié. Dans WhatsApp, collez-le dans la conversation (appui long, « Coller »), puis appuyez sur « Envoyer ». Si rien n’est copié, utilisez « Copier le message ».</p>
-              <ol><li>Nous vérifions la disponibilité.</li><li>Nous vous envoyons le lien de paiement PayPal.</li><li>Votre sweat est brodé puis expédié.</li></ol>
+              <p>Votre précommande est prête dans WhatsApp ou dans votre messagerie : appuyez sur « Envoyer » pour nous la transmettre.</p>
+              <ol><li>Nous vérifions la disponibilité.</li><li>Nous vous indiquons la livraison et les modalités de paiement.</li><li>Votre sweat est brodé puis expédié.</li></ol>
             </div>
           </div>
         </div>
@@ -378,7 +382,7 @@ footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-trans
     </div>
     <div class="meta">
       <b>Contact</b>
-      <span>alk-urithi@proton.me</span>
+      <span>contact@alkubuntu.com</span>
       <span>France · précommandes bientôt</span>
       <span>© 2026 ALK Urithi</span>
     </div>
@@ -388,9 +392,8 @@ footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-trans
 <script>
 /* ===== Réglages à modifier ===== */
 var PRICE=49.99;              /* prix d'un sweat, en euros (point, pas virgule) */
-var WA_LINK='https://wa.me/message/A5XHQGCBXG5HO1';   /* lien WhatsApp Business (QR / lien court) : prioritaire */
-var WA_NUMBER='';             /* numéro WhatsApp Business, format international sans + (ex. 33612345678) */
-var EMAIL='alk-urithi@proton.me';
+var WA_NUMBER='33758029172';  /* numéro WhatsApp Business, format international sans + ni espaces : reçoit le message déjà rédigé */
+var EMAIL='contact@alkubuntu.com';  /* reçoit les précommandes envoyées par e-mail */
 var PAYPAL='https://paypal.me/EmmanuelDestaing';  /* lien PayPal.me, à envoyer au client après confirmation */
 /* Enregistrement automatique des commandes dans un Google Form / Google Sheets (laisser FORM_URL vide pour désactiver) */
 var FORM_URL='';              /* ex. https://docs.google.com/forms/d/e/XXXX/formResponse */
@@ -466,11 +469,12 @@ function total(){return cart.reduce(function(a,l){return a+l.q*PRICE},0)}
 function newRef(){var d=new Date(),p=function(x){return String(x).padStart(2,'0')},ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',r='';for(var i=0;i<4;i++)r+=ch[Math.floor(Math.random()*ch.length)];return 'ALK-'+p(d.getMonth()+1)+p(d.getDate())+'-'+r}
 function message(){
   if(!ref)ref=newRef();
-  var nm=$('fname').value.trim(),L=['Bonjour ALK Urithi, nouvelle précommande (réf. '+ref+')'];
-  if(nm)L.push('Prénom : '+nm);
-  cart.forEach(function(l){L.push(l.q+' × '+sku(l.k)+' · '+label(l.k)+' · taille '+l.s+' · '+eur(l.q*PRICE))});
-  L.push('Total : '+eur(total()));
-  L.push('Je règle par PayPal : merci de me confirmer la disponibilité, la livraison et le lien de paiement.');
+  var L=['Bonjour ALK Urithi,','Je viens de passer une précommande (réf. '+ref+') :'];
+  cart.forEach(function(l){L.push('• '+l.q+' × Sweat '+label(l.k)+' · taille '+l.s+' · '+eur(l.q*PRICE)+' ('+sku(l.k)+')')});
+  L.push('Total : '+eur(total())+' (hors frais de livraison)');
+  L.push('Livraison : '+$('fcity').value.trim());
+  L.push('Merci de me confirmer la disponibilité, le mode et les frais de livraison, ainsi que les modalités de paiement.');
+  L.push($('fname').value.trim());
   return L.join('\n');
 }
 function drawCart(){
@@ -488,14 +492,15 @@ function drawCart(){
     ul.appendChild(li);
   });
   var has=cart.length>0;
-  $('empty').hidden=has;$('totalrow').hidden=!has;$('nameField').hidden=!has;
+  $('empty').hidden=has;$('totalrow').hidden=!has;$('nameField').hidden=!has;$('cityField').hidden=!has;
   $('total').textContent=eur(total());
-  $('copy').hidden=!has;
-  var wa=$('wa');wa.hidden=!has;
-  if(has&&WA_LINK){wa.href=WA_LINK;wa.setAttribute('aria-disabled','false');wa.textContent='Envoyer ma précommande sur WhatsApp'}
-  else if(has&&WA_NUMBER){wa.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(message());wa.setAttribute('aria-disabled','false');wa.textContent='Envoyer ma précommande sur WhatsApp'}
-  else if(has){wa.href='#';wa.setAttribute('aria-disabled','true');wa.textContent='WhatsApp bientôt disponible'}
-  $('mail').hidden=!(has&&!WA_NUMBER);
+  /* les deux boutons ne s'activent qu'une fois le nom et la ville remplis */
+  var ready=has&&$('fname').value.trim().length>1&&$('fcity').value.trim().length>1,t=ready?message():'';
+  $('hint').hidden=!has||ready;
+  var wa=$('wa'),mb=$('mailbtn');wa.hidden=!has||!WA_NUMBER;mb.hidden=!has||!EMAIL;
+  wa.href=ready?'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(t):'#';
+  mb.href=ready?'mailto:'+EMAIL+'?subject='+encodeURIComponent('Précommande ALK Urithi · réf. '+ref)+'&body='+encodeURIComponent(t.replace(/\n/g,'\r\n')):'#';
+  wa.setAttribute('aria-disabled',String(!ready));mb.setAttribute('aria-disabled',String(!ready));
 }
 function sendToForm(){
   if(!FORM_URL||!FORM_FIELDS.ref)return;
@@ -515,16 +520,12 @@ $('add').addEventListener('click',function(){
   ref=null;$('done').hidden=true;save();draw();
 });
 $('fname').addEventListener('input',function(){drawCart()});
-$('wa').addEventListener('click',function(e){
-  if(this.getAttribute('aria-disabled')==='true'){e.preventDefault();return}
-  var t=message();
-  if(WA_LINK){try{navigator.clipboard.writeText(t).then(function(){$('toast').textContent='Message copié : collez-le dans la conversation WhatsApp.'},function(){})}catch(x){}}
-  $('doneref').textContent='Référence '+ref;$('done').hidden=false;sendToForm();
-});
-$('copy').addEventListener('click',function(){
-  var t=message(),done=function(){$('toast').textContent='Message copié. Envoyez-le sur WhatsApp ou à '+EMAIL+'.';$('doneref').textContent='Référence '+ref;$('done').hidden=false},
-  fail=function(){$('toast').textContent='Copie impossible : sélectionnez le récapitulatif ci-dessus.'};
-  try{navigator.clipboard.writeText(t).then(done,fail)}catch(e){fail()}
+$('fcity').addEventListener('input',function(){drawCart()});
+['wa','mailbtn'].forEach(function(id){
+  $(id).addEventListener('click',function(e){
+    if(this.getAttribute('aria-disabled')==='true'){e.preventDefault();return}
+    $('doneref').textContent='Référence '+ref;$('done').hidden=false;sendToForm();
+  });
 });
 document.querySelectorAll('[data-pick]').forEach(function(b){
   b.addEventListener('click',function(){set('m',b.getAttribute('data-pick'));$('boutique').scrollIntoView({behavior:'smooth'})});
