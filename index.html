@@ -1,5 +1,10 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ALK Urithi · Collection Ubuntu : trois masques africains brodés sur un sweat en coton biologique. Précommandes en petites séries.">
 <title>ALK Urithi</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&family=Karla:wght@400;500;700&display=swap">
@@ -22,6 +27,7 @@
   --accent:#D9B98E; --on-accent:#17130F; --terra:#E0894F; --green:#8FB69F;
   --show-lt:none; --show-dk:block; color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.05}
@@ -182,6 +188,8 @@ footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-trans
 @media(max-width:640px){footer{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
+</head>
+<body>
 
 <div class="wrap">
   <div class="announce">Précommandes bientôt · Collection n°1 · Broderie sur sweat</div>
@@ -387,6 +395,9 @@ var PAYPAL='https://paypal.me/EmmanuelDestaing';  /* lien PayPal.me, à envoyer 
 /* Enregistrement automatique des commandes dans un Google Form / Google Sheets (laisser FORM_URL vide pour désactiver) */
 var FORM_URL='';              /* ex. https://docs.google.com/forms/d/e/XXXX/formResponse */
 var FORM_FIELDS={ref:'',name:'',sku:'',size:'',qty:'',amount:''};  /* ex. ref:'entry.123456789' */          /* moyen de paiement affiché */
+/* Stock en direct : lien CSV de l'onglet « Site » du Google Sheet, publié sur le web (Fichier › Partager › Publier sur le web).
+   Laisser vide pour utiliser le STOCK écrit ci-dessous, qui sert aussi de secours si le Sheet ne répond pas. */
+var STOCK_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vQDP4cugOIE4ReRzVBw6sNuq5TYax1CLPnZpKbJtWKpEjziQx6FSQSN5eeoQgu_7sIIXuSlf6LGZuKr/pub?gid=110506722&single=true&output=csv';
 /* Stock de la première série par référence et par taille (tech pack, 25 pièces) */
 var STOCK={
   'M01-NAT':{S:0,M:1,L:1,XL:1}, 'M01-CHI':{S:1,M:1,L:1,XL:0}, 'M01-NAV':{S:1,M:1,L:1,XL:0},
@@ -519,4 +530,23 @@ document.querySelectorAll('[data-pick]').forEach(function(b){
   b.addEventListener('click',function(){set('m',b.getAttribute('data-pick'));$('boutique').scrollIntoView({behavior:'smooth'})});
 });
 draw();
+/* Lit le stock publié (colonnes ref,S,M,L,XL) puis retire du panier ce qui n'est plus disponible */
+function loadStock(){
+  if(!STOCK_URL||!window.fetch)return;
+  fetch(STOCK_URL,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.text()}).then(function(t){
+    var rows=t.trim().split(/\r?\n/).map(function(l){return l.split(',').map(function(c){return c.replace(/^"|"$/g,'').trim()})});
+    var h=rows[0]||[],n=0;
+    rows.slice(1).forEach(function(c){
+      if(!STOCK[c[0]])return;
+      SIZES.forEach(function(s){var i=h.indexOf(s),v=parseInt(c[i],10);if(i>0&&v>=0){STOCK[c[0]][s]=v;n++}});
+    });
+    if(!n)return;
+    cart.forEach(function(l){var over=-left(l.k,l.s);if(over>0)l.q-=over});
+    cart=cart.filter(function(l){return l.q>0});
+    save();draw();
+  }).catch(function(){});
+}
+loadStock();
 </script>
+</body>
+</html>
