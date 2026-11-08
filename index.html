@@ -192,7 +192,7 @@ footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-trans
 <body>
 
 <div class="wrap">
-  <div class="announce">Précommandes ouvertes · Collection n°1 · Broderie sur sweat</div>
+  <div class="announce">Précommandes ouvertes jusqu’au 22 novembre · Collection n°1 · Broderie sur sweat</div>
   <header class="top">
     <a class="brand" href="#accueil" aria-label="ALK Urithi, accueil">
       <img class="lt" src="img/ALK_noir.webp" alt="ALK" width="64" height="31">
@@ -305,7 +305,7 @@ footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-trans
             <li><span>Modèle</span><span>Sweat col rond unisexe, coupe droite</span></li>
             <li><span>Matière</span><span>100 % coton biologique, 350 g/m²</span></li>
             <li><span>Marquage</span><span>Broderie côté cœur, dos uni</span></li>
-            <li><span>Livraison</span><span>3 à 4 semaines après la clôture de la précommande</span></li>
+            <li><span>Livraison</span><span>Entre 1 et 3 semaines après la clôture des précommandes (22 novembre)</span></li>
           </ul>
 
           <div class="order">
@@ -383,7 +383,7 @@ footer .meta b{font:600 .76rem/1 var(--f-display);letter-spacing:.2em;text-trans
     <div class="meta">
       <b>Contact</b>
       <span>contact@alkubuntu.com</span>
-      <span>France · précommandes ouvertes</span>
+      <span>France · précommandes jusqu’au 22 novembre</span>
       <span>© 2026 ALK Urithi</span>
     </div>
   </footer>
@@ -461,7 +461,7 @@ function draw(){
   $('prodcap').textContent=m.name+' · '+c.name+' · maquette';
   $('price').textContent=eur(PRICE);
   var n=left(k,st.s),sold=SIZES.every(function(s){return left(k,s)<=0});
-  $('stock').textContent=sold?'Ce coloris est épuisé pour la première série.':(n===1?'Dernière pièce en taille '+st.s+'.':'Plus que '+n+' pièces en taille '+st.s+'.');
+  $('stock').textContent=sold?'Ce coloris est épuisé pour la première série.':(n===1?'Dernière pièce en taille '+st.s+'.':'Plus que quelques pièces en taille '+st.s+'.');
   $('add').disabled=n<=0;
   drawCart();
 }
